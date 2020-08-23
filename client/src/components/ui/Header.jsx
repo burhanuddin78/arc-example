@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   logo: {
-    height: '7em',
+    height: '7.2em',
     [theme.breakpoints.down('md')]: {
       height: '6em',
     },
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
       height: '5.5em',
     },
   },
-  logoComponent: {
+  logoContainer: {
     padding: 0,
     '&:hover': {
       backgroundColor: 'transparent',
@@ -411,7 +411,7 @@ function Header(props) {
               component={Link}
               to='/'
               disableRipple
-              onClick={() => props.setValue(0)}
+              onClick={() => setValue(0)}
               className={classes.logoContainer}
             >
               <img alt='company logo' className={classes.logo} src={logo} />
