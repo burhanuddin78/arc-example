@@ -143,6 +143,25 @@ function Header(props) {
 
   const { value, setValue, selectIndex, setSelectIndex } = props;
 
+  const handleChange = (e, value) => {
+    setValue(value);
+  };
+
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+    setOpenMenu(true);
+  };
+
+  const handleClose = (e) => {
+    setAnchorEl(null);
+    setOpenMenu(false);
+  };
+  const handleMenuItemClick = (e, i) => {
+    setAnchorEl(null);
+    setOpenMenu(false);
+    setSelectIndex(i);
+  };
+
   const menuitems = [
     {
       name: 'Custom Software Development',
@@ -192,30 +211,12 @@ function Header(props) {
         case '/estimate':
           setValue(5);
           break;
+          break;
         default:
           break;
       }
     });
   }, [value, menuitems, routes, selectIndex, setValue, setSelectIndex]);
-
-  const handleChange = (e, value) => {
-    setValue(value);
-  };
-
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget);
-    setOpenMenu(true);
-  };
-
-  const handleClose = (e) => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-  };
-  const handleMenuItemClick = (e, i) => {
-    setAnchorEl(null);
-    setOpenMenu(false);
-    setSelectIndex(i);
-  };
 
   // function handleListKeyDown(event) {
   //   if (event.key === 'Tab') {
@@ -249,9 +250,9 @@ function Header(props) {
         ))}
       </Tabs>
       <Button
-        variant='contained'
         component={Link}
         to='/estimate'
+        variant='contained'
         color='secondary'
         className={classes.button}
         onClick={() => setValue(5)}
