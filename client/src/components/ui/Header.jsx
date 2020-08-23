@@ -211,7 +211,7 @@ function Header(props) {
         case '/estimate':
           setValue(5);
           break;
-          break;
+
         default:
           break;
       }
@@ -406,20 +406,18 @@ function Header(props) {
     <React.Fragment>
       <ElevationScroll>
         <AppBar position='fixed' className={classes.appbar}>
-          <ToolBar disableGutters>
+          <Toolbar disableGutters>
             <Button
               component={Link}
               to='/'
               disableRipple
-              className={classes.logoComponent}
-              onClick={() => {
-                setValue(0);
-              }}
+              onClick={() => props.setValue(0)}
+              className={classes.logoContainer}
             >
-              <img src={logo} className={classes.logo} alt='compaany logo ' />
+              <img alt='company logo' className={classes.logo} src={logo} />
             </Button>
             {matches ? drawer : tabs}
-          </ToolBar>
+          </Toolbar>
         </AppBar>
       </ElevationScroll>
       <div className={classes.toolbarMargin} />
