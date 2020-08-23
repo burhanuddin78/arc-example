@@ -8,9 +8,8 @@ const pass = config.get('pass');
 var transport = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
-    user: 'burhanuddinimran012@gmail.com',
-
-    pass: 'you7willwin86',
+    user: user,
+    pass: pass,
   },
   tls: {
     // do not fail on invalid certs
