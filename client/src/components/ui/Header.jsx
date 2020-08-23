@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import ToolBar from '@material-ui/core/ToolBar';
+import { Toolbar } from '@material-ui/core';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import { makeStyles } from '@material-ui/core/styles';
 import logo from '../../assets/logo.svg';
