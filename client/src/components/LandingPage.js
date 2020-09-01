@@ -21,7 +21,9 @@ import CardContent from '@material-ui/core/CardContent';
 
 import CallToAction from './ui/CallToAction';
 import { Link } from 'react-router-dom';
-import { Zoom, Slide } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
+
+import VisibilitySensor from 'react-visibility-sensor';
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -65,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heroTextContainer: {
     minWidth: '21.5em',
-    marginLeft: '1em',
+    marginLeft: '6em',
     [theme.breakpoints.down('xs')]: {
       marginLeft: 0,
     },
@@ -134,6 +136,8 @@ export default function LandingPage(props) {
   const classes = useStyles();
   const theme = useTheme();
 
+  // let [active, setActive] = useState(false);
+
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesXs = useMediaQuery(theme.breakpoints.down('xs'));
   const defaultOptions = {
@@ -195,10 +199,10 @@ export default function LandingPage(props) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid>
-        {/*-----Services Block ------*/}
+      <Slide in={true} direction='right' timeout={{ enter: 500, exit: 1000 }}>
+        <Grid>
+          {/*-----Services Block ------*/}
 
-        <Zoom in={true}>
           <Grid
             container
             direction='row'
@@ -246,43 +250,108 @@ export default function LandingPage(props) {
               />
             </Grid>
           </Grid>
-        </Zoom>
-      </Grid>
+        </Grid>
+      </Slide>
 
-      <Slide direction='left' in={true}>
-        <Grid>
+      <VisibilitySensor partialVisibility>
+        {({ isVisible }) => (
+          <Slide
+            direction='left'
+            in={isVisible ? true : false}
+            timeout={1000}
+            appear
+          >
+            <Grid>
+              {/*-----Services Block ------*/}
+              <Grid
+                container
+                item
+                direction='row'
+                justify={matchesSM ? 'center' : 'flex-end'}
+                className={classes.serviceContainer}
+              >
+                <Grid
+                  item
+                  style={{
+                    textAlign: matchesSM ? 'center' : undefined,
+                  }}
+                >
+                  <Typography variant='h4'>
+                    iOS/Android App Development
+                  </Typography>
+                  <Typography variant='subtitle1' className={classes.subtitle}>
+                    Extend Functionality. Extend Access. Increase Engagement.
+                  </Typography>
+                  <Typography variant='subtitle1'>
+                    Integrate your web experience or create a standalone app
+                    {matchesSM ? null : <br />}with either mobile platform.
+                  </Typography>
+                  <Button
+                    component={Link}
+                    to='/mobileapps'
+                    variant='outlined'
+                    className={classes.learnButton}
+                    onClick={() => {
+                      setValue(1);
+                      setSelectIndex(2);
+                    }}
+                  >
+                    <span style={{ marginRight: 10 }}>Learn More</span>
+                    <ButtonArrow
+                      width={10}
+                      height={10}
+                      fill={theme.palette.common.blue}
+                    />
+                  </Button>
+                </Grid>
+                <Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
+                  <img
+                    className={classes.icon}
+                    alt='mobile phone icon'
+                    src={MobileAppsIcons}
+                    width='250em'
+                  />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Slide>
+        )}
+      </VisibilitySensor>
+
+      <Slide in={true} direction='right' timeout={1000}>
+        <Grid item>
           {/*-----Services Block ------*/}
           <Grid
             container
             direction='row'
-            justify={matchesSM ? 'center' : 'flex-end'}
+            justify={matchesSM ? 'center' : undefined}
             className={classes.serviceContainer}
           >
             <Grid
               item
               style={{
+                marginLeft: matchesSM ? 0 : '3em',
                 textAlign: matchesSM ? 'center' : undefined,
               }}
             >
-              <Typography variant='h4'>iOS/Android App Development</Typography>
+              <Typography variant='h4'>Website Development</Typography>
               <Typography variant='subtitle1' className={classes.subtitle}>
-                Extend Functionality. Extend Access. Increase Engagement.
+                Reach More. Discover More. Sell More
               </Typography>
               <Typography variant='subtitle1'>
-                Integrate your web experience or create a standalone app
-                {matchesSM ? null : <br />}with either mobile platform.
+                Optimized for Search Engines, built for speed.
               </Typography>
               <Button
-                component={Link}
-                to='/mobileapps'
                 variant='outlined'
                 className={classes.learnButton}
+                component={Link}
+                to='/mobileapps'
                 onClick={() => {
                   setValue(1);
-                  setSelectIndex(2);
+                  setSelectIndex(3);
                 }}
               >
-                <span style={{ marginRight: 10 }}>Learn More</span>
+                <span style={{ marginRight: 8 }}> Learn More </span>
                 <ButtonArrow
                   width={10}
                   height={10}
@@ -290,67 +359,17 @@ export default function LandingPage(props) {
                 />
               </Button>
             </Grid>
-            <Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
+            <Grid item>
               <img
                 className={classes.icon}
-                alt='mobile phone icon'
-                src={MobileAppsIcons}
-                width='250em'
+                src={WebsiteIcon}
+                alt='Custom Software Development icon'
               />
             </Grid>
           </Grid>
         </Grid>
       </Slide>
-      <Grid item>
-        {/*-----Services Block ------*/}
-        <Grid
-          container
-          direction='row'
-          justify={matchesSM ? 'center' : undefined}
-          className={classes.serviceContainer}
-        >
-          <Grid
-            item
-            style={{
-              marginLeft: matchesSM ? 0 : '3em',
-              textAlign: matchesSM ? 'center' : undefined,
-            }}
-          >
-            <Typography variant='h4'>Website Development</Typography>
-            <Typography variant='subtitle1' className={classes.subtitle}>
-              Reach More. Discover More. Sell More
-            </Typography>
-            <Typography variant='subtitle1'>
-              Optimized for Search Engines, built for speed.
-            </Typography>
-            <Button
-              variant='outlined'
-              className={classes.learnButton}
-              component={Link}
-              to='/mobileapps'
-              onClick={() => {
-                setValue(1);
-                setSelectIndex(3);
-              }}
-            >
-              <span style={{ marginRight: 8 }}> Learn More </span>
-              <ButtonArrow
-                width={10}
-                height={10}
-                fill={theme.palette.common.blue}
-              />
-            </Button>
-          </Grid>
-          <Grid item>
-            <img
-              className={classes.icon}
-              src={WebsiteIcon}
-              alt='Custom Software Development icon'
-            />
-          </Grid>
-        </Grid>
-        {/* The Revolution Block */}
-      </Grid>
+      {/* The Revolution Block */}
       <Grid item>
         <Grid
           style={{ height: '100em', marginTop: '10em' }}
